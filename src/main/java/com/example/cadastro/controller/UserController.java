@@ -93,6 +93,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(new UserView(savedUser));
     }
 
+
+    /**
+     *  Métdodo utilizado para listar todos os usuários em ordem alfabética
+     * @return Lista de usuários
+     */
     @GetMapping
     @Operation(summary = "Listar todos os usuários",
             description = "Função para listar todos os usuários em ordem alfabética")
