@@ -21,6 +21,9 @@ public class UserView {
         this.modeloCelular = user.getModeloCelular();
     }
 
+    public UserView() {
+    }
+
     public Long getId() {
         return id;
     }

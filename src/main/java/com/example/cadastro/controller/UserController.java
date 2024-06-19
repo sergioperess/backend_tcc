@@ -9,9 +9,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import jakarta.validation.Valid;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/users")
@@ -25,6 +30,7 @@ public class UserController {
 
     /**
      * Método utilizado para criar um usuário
+     *
      * @param userDTO
      * @return ResponseEntity Created - 201  e o usuário criado
      */
@@ -41,6 +47,7 @@ public class UserController {
 
     /**
      * Método utilizado para encontrar um usuário por id
+     *
      * @param id do usuário
      * @return ResponseEntity OK - Status code 200 e o usuário
      */
@@ -56,6 +63,7 @@ public class UserController {
 
     /**
      * Método utilizado para apagar um usuário por id (Não há retorno)
+     *
      * @param userId Id do usuário
      */
     @DeleteMapping("{id}")
@@ -68,7 +76,8 @@ public class UserController {
 
     /**
      * Método utilizado para editar um usuário
-     * @param id - Id do usuário
+     *
+     * @param id            - Id do usuário
      * @param userUpdateDTO - RequestBody
      * @return ResponseEntity OK - Status code 200 e o usuário atualizado
      */
@@ -83,5 +92,19 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).body(new UserView(savedUser));
     }
+
+    @GetMapping
+    @Operation(summary = "Listar todos os usuários",
+            description = "Função para listar todos os usuários em ordem alfabética")
+    public ResponseEntity<List<UserView>> findAll() {
+        List<User> users = this.userServices.findAll();
+
+        List<UserView> entity = users.stream()
+                .map(user -> new ModelMapper().map(user, UserView.class))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.status(HttpStatus.OK).body(entity);
+    }
+
 }
 

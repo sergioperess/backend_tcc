@@ -4,7 +4,10 @@ import com.example.cadastro.entity.User;
 import com.example.cadastro.exceptions.BusinessException;
 import com.example.cadastro.repository.UserRepository;
 import com.example.cadastro.service.UserService;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class IUserServices implements UserService {
@@ -17,6 +20,7 @@ public class IUserServices implements UserService {
 
     /**
      * Método para criar um usuário
+     *
      * @param user Usuário
      * @return Usuário
      */
@@ -26,7 +30,8 @@ public class IUserServices implements UserService {
     }
 
     /**
-     *  Método para procurar um usuário por Id
+     * Método para procurar um usuário por Id
+     *
      * @param id Id
      * @return Usuário
      */
@@ -38,12 +43,25 @@ public class IUserServices implements UserService {
 
     /**
      * Método para deletar um usuário pelo id
+     *
      * @param userId Id do usuário
      */
     @Override
     public void delete(Long userId) {
         User user = this.findById(userId);
         this.userRepository.delete(user);
+    }
+
+    /**
+     *  Método para retornar todos os usuários por ordem alfabética
+     * @return Lista de usuários
+     */
+    @Override
+    public List<User> findAll() {
+        // Utilizado para ordenação
+        Sort sort = Sort.by("firstName").ascending()
+                .and(Sort.by("lastName").ascending());
+        return this.userRepository.findAll(sort);
     }
 
 }
