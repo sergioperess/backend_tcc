@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/users")
 @Tag(name = "User Controller", description = "Endpoints to manipulate a User")
 public class UserController {
-    private IUserServices userServices;
+    private final IUserServices userServices;
 
     public UserController(IUserServices userServices) {
         this.userServices = userServices;
