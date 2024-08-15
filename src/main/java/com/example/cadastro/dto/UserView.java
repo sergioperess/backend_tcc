@@ -8,17 +8,15 @@ public class UserView {
     private Long id;
     private String firstName;
     private String lastName;
-    private String password;
+    private String senha;
     private String email;
-    private String modeloCelular;
 
     public UserView(User user) {
         this.id = user.getId();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
-        this.password = user.getSenha();
+        this.senha = user.getSenha();
         this.email = user.getEmail();
-        this.modeloCelular = user.getModeloCelular();
     }
 
     public UserView() {
@@ -48,12 +46,12 @@ public class UserView {
         this.lastName = lastName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getEmail() {
@@ -64,24 +62,16 @@ public class UserView {
         this.email = email;
     }
 
-    public String getModeloCelular() {
-        return modeloCelular;
-    }
-
-    public void setModeloCelular(String modeloCelular) {
-        this.modeloCelular = modeloCelular;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof UserView userView)) return false;
-        return Objects.equals(getId(), userView.getId()) && Objects.equals(getFirstName(), userView.getFirstName()) && Objects.equals(getLastName(), userView.getLastName()) && Objects.equals(getPassword(), userView.getPassword()) && Objects.equals(getEmail(), userView.getEmail()) && Objects.equals(getModeloCelular(), userView.getModeloCelular());
+        return Objects.equals(getId(), userView.getId()) && Objects.equals(getFirstName(), userView.getFirstName()) && Objects.equals(getLastName(), userView.getLastName()) && Objects.equals(getSenha(), userView.getSenha()) && Objects.equals(getEmail(), userView.getEmail());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getPassword(), getEmail(), getModeloCelular());
+        return Objects.hash(getId(), getFirstName(), getLastName(), getSenha(), getEmail());
     }
 }
 

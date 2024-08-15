@@ -21,8 +21,6 @@ public class UserDTO {
     @NotEmpty(message = "Invalid input")
     @Email(message = "É necessário um email válido")
     private String email;
-    @NotEmpty(message = "Invalid input")
-    private String modeloCelular;
 
     public UserDTO() {
     }
@@ -33,7 +31,6 @@ public class UserDTO {
         this.cpf = user.getCpf();
         this.senha = user.getSenha();
         this.email = user.getEmail();
-        this.modeloCelular = user.getModeloCelular();
     }
 
 
@@ -43,8 +40,7 @@ public class UserDTO {
                 this.lastName,
                 this.cpf,
                 this.senha,
-                this.email,
-                this.modeloCelular
+                this.email
         );
     }
 
@@ -88,24 +84,16 @@ public class UserDTO {
         this.email = email;
     }
 
-    public String getModeloCelular() {
-        return modeloCelular;
-    }
-
-    public void setModeloCelular(String modeloCelular) {
-        this.modeloCelular = modeloCelular;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof UserDTO userDTO)) return false;
-        return Objects.equals(getFirstName(), userDTO.getFirstName()) && Objects.equals(getLastName(), userDTO.getLastName()) && Objects.equals(getCpf(), userDTO.getCpf()) && Objects.equals(getSenha(), userDTO.getSenha()) && Objects.equals(getEmail(), userDTO.getEmail()) && Objects.equals(getModeloCelular(), userDTO.getModeloCelular());
+        return Objects.equals(getFirstName(), userDTO.getFirstName()) && Objects.equals(getLastName(), userDTO.getLastName()) && Objects.equals(getCpf(), userDTO.getCpf()) && Objects.equals(getSenha(), userDTO.getSenha()) && Objects.equals(getEmail(), userDTO.getEmail());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getFirstName(), getLastName(), getCpf(), getSenha(), getEmail(), getModeloCelular());
+        return Objects.hash(getFirstName(), getLastName(), getCpf(), getSenha(), getEmail());
     }
 }
 

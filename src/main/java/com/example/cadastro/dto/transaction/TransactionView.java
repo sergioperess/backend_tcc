@@ -1,12 +1,14 @@
 package com.example.cadastro.dto.transaction;
 
+import com.example.cadastro.entity.Transaction;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
 public class TransactionView {
-    private UUID id;
+    private Long id;
     private BigDecimal transaction;
     private LocalDateTime date;
     private String type;
@@ -15,11 +17,19 @@ public class TransactionView {
     public TransactionView() {
     }
 
-    public UUID getId() {
+    public TransactionView(Transaction gasto) {
+        this.id = gasto.getId();
+        this.transaction = gasto.getTransaction();
+        this.date = gasto.getDate();
+        this.type = gasto.getType();
+        this.description = gasto.getDescription();
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

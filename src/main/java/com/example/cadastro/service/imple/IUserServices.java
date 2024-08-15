@@ -53,7 +53,8 @@ public class IUserServices implements UserService {
     }
 
     /**
-     *  Método para retornar todos os usuários por ordem alfabética
+     * Método para retornar todos os usuários por ordem alfabética
+     *
      * @return Lista de usuários
      */
     @Override
