@@ -43,14 +43,10 @@ public class TransactionController {
             description = "Método utilizado para cadastrar uma nova Transação")
     public ResponseEntity<TransactionView> save(@RequestBody @Valid TransactionDTO transactionDTO) {
 
-        Transaction transaction = new ModelMapper().map(transactionDTO, Transaction.class);
+        Transaction transaction = transactionDTO.toEntity();
         transaction.setDate(LocalDateTime.now());
         var entity = transactionService.save(transaction);
-
-        TransactionView transactionView = new ModelMapper().map(entity, TransactionView.class);
-
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(transactionView);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new TransactionView(entity));
     }
 
     /**

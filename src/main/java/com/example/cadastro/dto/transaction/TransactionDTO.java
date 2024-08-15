@@ -1,5 +1,7 @@
 package com.example.cadastro.dto.transaction;
 
+import com.example.cadastro.entity.Transaction;
+import com.example.cadastro.entity.User;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -50,6 +52,17 @@ public class TransactionDTO {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Transaction toEntity() {
+        User user = new User();
+        user.setId(this.userId);
+        return new Transaction(
+                this.transaction,
+                this.type,
+                this.description,
+                user
+        );
     }
 
     @Override

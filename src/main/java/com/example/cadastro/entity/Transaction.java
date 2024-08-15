@@ -1,5 +1,6 @@
 package com.example.cadastro.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -24,9 +25,17 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    @JsonBackReference
+    private User user = null;
 
     public Transaction() {
+    }
+
+    public Transaction(BigDecimal transaction, String type, String description, User user) {
+        this.transaction = transaction;
+        this.type = type;
+        this.description = description;
+        this.user = user;
     }
 
     public Long getId() {

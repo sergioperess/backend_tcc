@@ -75,11 +75,8 @@ public class ITransactionService implements TransactionService {
      */
     @Override
     public List<Transaction> findAllByUserId(Long userId) {
-        try {
-            userService.findById(userId);
-            return this.transactionRepository.findAllByUserId(userId);
-        } catch (BusinessException e) {
-            throw new BusinessException("Id: " + userId + " não encontrado");
-        }
+        userService.findById(userId);
+
+        return this.transactionRepository.findAllByUserId(userId);
     }
 }
