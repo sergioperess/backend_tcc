@@ -31,7 +31,7 @@ public class UserController {
     /**
      * Método utilizado para criar um usuário
      *
-     * @param userDTO
+     * @param userDTO Objeto de usuário para troca de dados
      * @return ResponseEntity Created - 201  e o usuário criado
      */
     @PostMapping
@@ -95,7 +95,7 @@ public class UserController {
 
 
     /**
-     *  Métdodo utilizado para listar todos os usuários em ordem alfabética
+     * Método utilizado para listar todos os usuários em ordem alfabética
      * @return Lista de usuários
      */
     @GetMapping

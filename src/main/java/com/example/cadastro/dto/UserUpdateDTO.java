@@ -9,22 +9,17 @@ public class UserUpdateDTO {
     @NotEmpty(message = "Invalid input")
     private String lastName;
 
-    @NotEmpty(message = "Invalid input")
-    private String modeloCelular;
-
     public UserUpdateDTO() {
     }
 
     public UserUpdateDTO(User user) {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
-        this.modeloCelular = user.getModeloCelular();
     }
 
     public User toEntity(User user) {
         user.setFirstName(this.firstName);
         user.setLastName(this.lastName);
-        user.setModeloCelular(this.modeloCelular);
         return user;
     }
 
@@ -44,11 +39,4 @@ public class UserUpdateDTO {
         this.lastName = lastName;
     }
 
-    public String getModeloCelular() {
-        return modeloCelular;
-    }
-
-    public void setModeloCelular(String modeloCelular) {
-        this.modeloCelular = modeloCelular;
-    }
 }

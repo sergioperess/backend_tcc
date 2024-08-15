@@ -11,8 +11,8 @@ import java.util.UUID;
 @Table(name = "transacao")
 public class Transaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(nullable = false)
     private BigDecimal transaction;
     @Column(nullable = false)
@@ -22,14 +22,18 @@ public class Transaction {
     @Column(nullable = false)
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Transaction() {
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -65,15 +69,23 @@ public class Transaction {
         this.description = description;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Transaction that)) return false;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getTransaction(), that.getTransaction()) && Objects.equals(getDate(), that.getDate()) && Objects.equals(getType(), that.getType()) && Objects.equals(getDescription(), that.getDescription());
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getTransaction(), that.getTransaction()) && Objects.equals(getDate(), that.getDate()) && Objects.equals(getType(), that.getType()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getUser(), that.getUser());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTransaction(), getDate(), getType(), getDescription());
+        return Objects.hash(getId(), getTransaction(), getDate(), getType(), getDescription(), getUser());
     }
 }

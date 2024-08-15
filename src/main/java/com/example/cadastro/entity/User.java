@@ -2,6 +2,8 @@ package com.example.cadastro.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,8 +22,9 @@ public class User {
     private String senha;
     @Column(nullable = false, unique = true)
     private String email;
-    @Column(nullable = false)
-    private String modeloCelular;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE,
+            mappedBy = "user")
+    private List<Transaction> transactions = new ArrayList<>();
 
     /**
      *  Construtor vazio
@@ -29,13 +32,12 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, String cpf, String senha, String email, String modeloCelular) {
+    public User(String firstName, String lastName, String cpf, String senha, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.cpf = cpf;
         this.senha = senha;
         this.email = email;
-        this.modeloCelular = modeloCelular;
     }
 
     public Long getId() {
@@ -86,23 +88,23 @@ public class User {
         this.email = email;
     }
 
-    public String getModeloCelular() {
-        return modeloCelular;
+    public List<Transaction> getTransactions() {
+        return transactions;
     }
 
-    public void setModeloCelular(String modeloCelular) {
-        this.modeloCelular = modeloCelular;
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User user)) return false;
-        return Objects.equals(getId(), user.getId()) && Objects.equals(getFirstName(), user.getFirstName()) && Objects.equals(getLastName(), user.getLastName()) && Objects.equals(getCpf(), user.getCpf()) && Objects.equals(getSenha(), user.getSenha()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getModeloCelular(), user.getModeloCelular());
+        return Objects.equals(getId(), user.getId()) && Objects.equals(getFirstName(), user.getFirstName()) && Objects.equals(getLastName(), user.getLastName()) && Objects.equals(getCpf(), user.getCpf()) && Objects.equals(getSenha(), user.getSenha()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getTransactions(), user.getTransactions());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getCpf(), getSenha(), getEmail(), getModeloCelular());
+        return Objects.hash(getId(), getFirstName(), getLastName(), getCpf(), getSenha(), getEmail(), getTransactions());
     }
 }

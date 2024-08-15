@@ -5,7 +5,6 @@ CREATE TABLE usuario (
    cpf VARCHAR(255) NOT NULL,
    senha VARCHAR(255) NOT NULL,
    email VARCHAR(255) NOT NULL,
-   modelo_celular VARCHAR(255) NOT NULL,
    CONSTRAINT pk_usuario PRIMARY KEY (id)
 );
 
