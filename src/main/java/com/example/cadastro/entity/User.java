@@ -1,5 +1,6 @@
 package com.example.cadastro.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -24,7 +25,8 @@ public class User {
     private String email;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE,
             mappedBy = "user")
-    private List<Transaction> transactions = new ArrayList<>();
+    @JsonManagedReference
+    private List<Transaction> transactions;
 
     /**
      *  Construtor vazio
