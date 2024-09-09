@@ -1,13 +1,10 @@
 package com.example.cadastro.service.imple;
 
 import com.example.cadastro.entity.Transaction;
-import com.example.cadastro.entity.User;
 import com.example.cadastro.exceptions.BusinessException;
 import com.example.cadastro.repository.TransactionRepository;
-import com.example.cadastro.repository.UserRepository;
 import com.example.cadastro.service.TransactionService;
 import com.example.cadastro.service.UserService;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

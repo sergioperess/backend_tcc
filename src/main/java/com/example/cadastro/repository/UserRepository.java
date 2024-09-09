@@ -3,6 +3,8 @@ package com.example.cadastro.repository;
 import com.example.cadastro.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 /**
  * Interface UserRepository
  * Esta interface é um repositório para a entidade User.
@@ -11,5 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface UserRepository extends JpaRepository<User, Long> {
     // A interface JpaRepository fornece métodos como save, findById, findAll, deleteById, etc.
-    // Não há necessidade de definir métodos adicionais aqui a menos que sejam personalizados.
+    Optional<User> findByEmail(String email);
 }

@@ -1,6 +1,6 @@
 CREATE TABLE transacao (
   id BIGINT AUTO_INCREMENT NOT NULL,
-   transaction DECIMAL NOT NULL,
+   valor DECIMAL NOT NULL,
    date datetime NOT NULL,
    type VARCHAR(255) NOT NULL,
    `description` VARCHAR(255) NOT NULL,

@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public class TransactionView {
     private Long id;
-    private BigDecimal transaction;
+    private BigDecimal valor;
     private LocalDateTime date;
     private String type;
     private String description;
@@ -19,7 +19,7 @@ public class TransactionView {
 
     public TransactionView(Transaction gasto) {
         this.id = gasto.getId();
-        this.transaction = gasto.getTransaction();
+        this.valor = gasto.getValor();
         this.date = gasto.getDate();
         this.type = gasto.getType();
         this.description = gasto.getDescription();
@@ -33,12 +33,12 @@ public class TransactionView {
         this.id = id;
     }
 
-    public BigDecimal getTransaction() {
-        return transaction;
+    public BigDecimal getValor() {
+        return valor;
     }
 
-    public void setTransaction(BigDecimal transaction) {
-        this.transaction = transaction;
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
     }
 
     public LocalDateTime getDate() {
@@ -69,11 +69,11 @@ public class TransactionView {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof TransactionView that)) return false;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getTransaction(), that.getTransaction()) && Objects.equals(getDate(), that.getDate()) && Objects.equals(getType(), that.getType()) && Objects.equals(getDescription(), that.getDescription());
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getValor(), that.getValor()) && Objects.equals(getDate(), that.getDate()) && Objects.equals(getType(), that.getType()) && Objects.equals(getDescription(), that.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTransaction(), getDate(), getType(), getDescription());
+        return Objects.hash(getId(), getValor(), getDate(), getType(), getDescription());
     }
 }

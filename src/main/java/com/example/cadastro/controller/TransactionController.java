@@ -1,12 +1,9 @@
 package com.example.cadastro.controller;
 
-import com.example.cadastro.dto.UserUpdateDTO;
-import com.example.cadastro.dto.UserView;
 import com.example.cadastro.dto.transaction.TransactionDTO;
 import com.example.cadastro.dto.transaction.TransactionUpdateDTO;
 import com.example.cadastro.dto.transaction.TransactionView;
 import com.example.cadastro.entity.Transaction;
-import com.example.cadastro.entity.User;
 import com.example.cadastro.service.imple.ITransactionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

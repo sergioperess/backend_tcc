@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 public class TransactionUpdateDTO {
     @NotNull(message = "Invalid input")
-    private BigDecimal transaction;
+    private BigDecimal valor;
     @NotEmpty(message = "Invalid input")
     private String type;
     @NotEmpty(message = "Invalid input")
@@ -20,26 +20,26 @@ public class TransactionUpdateDTO {
     }
 
     public TransactionUpdateDTO(Transaction transactions) {
-        this.transaction = transactions.getTransaction();
+        this.valor = transactions.getValor();
         this.type = transactions.getType();
         this.description = transactions.getDescription();
         this.date = transactions.getDate();
     }
 
     public Transaction toEntity(Transaction transactions){
-        transactions.setTransaction(this.transaction);
+        transactions.setValor(this.valor);
         transactions.setType(this.type);
         transactions.setDescription(this.description);
         transactions.setDate(LocalDateTime.now());
         return transactions;
     }
 
-    public BigDecimal getTransaction() {
-        return transaction;
+    public BigDecimal getValor() {
+        return valor;
     }
 
-    public void setTransaction(BigDecimal transaction) {
-        this.transaction = transaction;
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
     }
 
     public String getType() {
