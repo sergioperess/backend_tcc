@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class TransactionDTO {
     @NotNull(message = "Invalid input")
-    private BigDecimal transaction;
+    private BigDecimal valor;
     @NotEmpty(message = "Invalid input")
     private String type;
     @NotEmpty(message = "Invalid input")
@@ -22,12 +22,12 @@ public class TransactionDTO {
     public TransactionDTO() {
     }
 
-    public BigDecimal getTransaction() {
-        return transaction;
+    public BigDecimal getValor() {
+        return valor;
     }
 
-    public void setTransaction(BigDecimal transaction) {
-        this.transaction = transaction;
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
     }
 
     public String getType() {
@@ -58,7 +58,7 @@ public class TransactionDTO {
         User user = new User();
         user.setId(this.userId);
         return new Transaction(
-                this.transaction,
+                this.valor,
                 this.type,
                 this.description,
                 user
@@ -69,11 +69,11 @@ public class TransactionDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof TransactionDTO that)) return false;
-        return Objects.equals(getTransaction(), that.getTransaction()) && Objects.equals(getType(), that.getType()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getUserId(), that.getUserId());
+        return Objects.equals(getValor(), that.getValor()) && Objects.equals(getType(), that.getType()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getUserId(), that.getUserId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTransaction(), getType(), getDescription(), getUserId());
+        return Objects.hash(getValor(), getType(), getDescription(), getUserId());
     }
 }

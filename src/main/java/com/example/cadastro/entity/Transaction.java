@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
 @Table(name = "transacao")
@@ -15,7 +14,7 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private BigDecimal transaction;
+    private BigDecimal valor;
     @Column(nullable = false)
     private LocalDateTime date;
     @Column(nullable = false)
@@ -31,8 +30,8 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(BigDecimal transaction, String type, String description, User user) {
-        this.transaction = transaction;
+    public Transaction(BigDecimal valor, String type, String description, User user) {
+        this.valor = valor;
         this.type = type;
         this.description = description;
         this.user = user;
@@ -46,12 +45,12 @@ public class Transaction {
         this.id = id;
     }
 
-    public BigDecimal getTransaction() {
-        return transaction;
+    public BigDecimal getValor() {
+        return valor;
     }
 
-    public void setTransaction(BigDecimal transaction) {
-        this.transaction = transaction;
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
     }
 
     public LocalDateTime getDate() {
@@ -90,11 +89,11 @@ public class Transaction {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Transaction that)) return false;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getTransaction(), that.getTransaction()) && Objects.equals(getDate(), that.getDate()) && Objects.equals(getType(), that.getType()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getUser(), that.getUser());
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getValor(), that.getValor()) && Objects.equals(getDate(), that.getDate()) && Objects.equals(getType(), that.getType()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getUser(), that.getUser());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTransaction(), getDate(), getType(), getDescription(), getUser());
+        return Objects.hash(getId(), getValor(), getDate(), getType(), getDescription(), getUser());
     }
 }
