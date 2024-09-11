@@ -44,7 +44,7 @@ public class AuthController {
         if(passwordEncoder.matches(body.senha(), user.getSenha())){
             // Se as senhas forem iguais, gera um token para o usuário
             String token = this.tokenService.generateToken(user);
-            return ResponseEntity.ok(new LoginView(user.getEmail(), token));
+            return ResponseEntity.ok(new LoginView(user.getId(),user.getEmail(), token));
         }
         //return ResponseEntity.badRequest().build();
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BusinessException("Senha incorreta"));
@@ -67,7 +67,7 @@ public class AuthController {
 
             // Geração do token após o usuário ser criado
             String token = this.tokenService.generateToken(newUser);
-            return ResponseEntity.ok(new LoginView(newUser.getEmail(), token));
+            return ResponseEntity.ok(new LoginView(newUser.getId(), newUser.getEmail(), token));
         }
         return ResponseEntity.badRequest().build();
     }
