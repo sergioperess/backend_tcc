@@ -1,5 +1,6 @@
 package com.example.cadastro.dto.transaction;
 
+import com.example.cadastro.entity.TipoGasto;
 import com.example.cadastro.entity.Transaction;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -9,9 +10,9 @@ import java.time.LocalDateTime;
 
 public class TransactionUpdateDTO {
     @NotNull(message = "Invalid input")
-    private BigDecimal valor;
-    @NotEmpty(message = "Invalid input")
-    private String type;
+    private float valor;
+    @NotNull
+    private Long typeId;
     @NotEmpty(message = "Invalid input")
     private String description;
     private LocalDateTime date;
@@ -21,33 +22,37 @@ public class TransactionUpdateDTO {
 
     public TransactionUpdateDTO(Transaction transactions) {
         this.valor = transactions.getValor();
-        this.type = transactions.getType();
+        this.typeId = transactions.getType().getId();
         this.description = transactions.getDescription();
         this.date = transactions.getDate();
     }
 
     public Transaction toEntity(Transaction transactions){
+        TipoGasto tipoGasto = new TipoGasto();
+        tipoGasto.setId(this.typeId);
+
         transactions.setValor(this.valor);
-        transactions.setType(this.type);
         transactions.setDescription(this.description);
+        transactions.setType(tipoGasto);
         transactions.setDate(LocalDateTime.now());
+
         return transactions;
     }
 
-    public BigDecimal getValor() {
+    public float getValor() {
         return valor;
     }
 
-    public void setValor(BigDecimal valor) {
+    public void setValor(float valor) {
         this.valor = valor;
     }
 
-    public String getType() {
-        return type;
+    public Long getTypeId() {
+        return typeId;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTypeId(Long typeId) {
+        this.typeId = typeId;
     }
 
     public String getDescription() {

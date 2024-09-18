@@ -84,7 +84,7 @@ public class TransactionController {
      */
     @PatchMapping
     @Operation(summary = "Editar uma transação", description = "Função para editar uma transação")
-    public ResponseEntity<TransactionView> updateUser(
+    public ResponseEntity<TransactionView> updateTransaction(
             @RequestParam(value = "transactionId") Long id,
             @RequestBody @Valid TransactionUpdateDTO transactionUpdateDTO) {
 

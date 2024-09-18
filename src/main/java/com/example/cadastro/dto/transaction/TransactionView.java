@@ -1,5 +1,6 @@
 package com.example.cadastro.dto.transaction;
 
+import com.example.cadastro.entity.TipoGasto;
 import com.example.cadastro.entity.Transaction;
 
 import java.math.BigDecimal;
@@ -9,7 +10,7 @@ import java.util.UUID;
 
 public class TransactionView {
     private Long id;
-    private BigDecimal valor;
+    private float valor;
     private LocalDateTime date;
     private String type;
     private String description;
@@ -21,7 +22,7 @@ public class TransactionView {
         this.id = gasto.getId();
         this.valor = gasto.getValor();
         this.date = gasto.getDate();
-        this.type = gasto.getType();
+        this.type = gasto.getType().getNome();
         this.description = gasto.getDescription();
     }
 
@@ -33,11 +34,11 @@ public class TransactionView {
         this.id = id;
     }
 
-    public BigDecimal getValor() {
+    public float getValor() {
         return valor;
     }
 
-    public void setValor(BigDecimal valor) {
+    public void setValor(float valor) {
         this.valor = valor;
     }
 

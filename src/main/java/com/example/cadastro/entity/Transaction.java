@@ -14,14 +14,14 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private BigDecimal valor;
+    private float valor;
     @Column(nullable = false)
     private LocalDateTime date;
-    @Column(nullable = false)
-    private String type;
+    @ManyToOne
+    @JoinColumn(name = "gasto_id")
+    private TipoGasto type = null;
     @Column(nullable = false)
     private String description;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonBackReference
@@ -30,7 +30,7 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(BigDecimal valor, String type, String description, User user) {
+    public Transaction(float valor, TipoGasto type, String description, User user) {
         this.valor = valor;
         this.type = type;
         this.description = description;
@@ -45,28 +45,12 @@ public class Transaction {
         this.id = id;
     }
 
-    public BigDecimal getValor() {
-        return valor;
-    }
-
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
-    }
-
     public LocalDateTime getDate() {
         return date;
     }
 
     public void setDate(LocalDateTime date) {
         this.date = date;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getDescription() {
@@ -83,6 +67,22 @@ public class Transaction {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public float getValor() {
+        return valor;
+    }
+
+    public void setValor(float valor) {
+        this.valor = valor;
+    }
+
+    public TipoGasto getType() {
+        return type;
+    }
+
+    public void setType(TipoGasto type) {
+        this.type = type;
     }
 
     @Override

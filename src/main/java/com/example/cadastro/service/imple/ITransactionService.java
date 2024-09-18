@@ -3,6 +3,7 @@ package com.example.cadastro.service.imple;
 import com.example.cadastro.entity.Transaction;
 import com.example.cadastro.exceptions.BusinessException;
 import com.example.cadastro.repository.TransactionRepository;
+import com.example.cadastro.service.TipoGastoService;
 import com.example.cadastro.service.TransactionService;
 import com.example.cadastro.service.UserService;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,16 @@ public class ITransactionService implements TransactionService {
     private TransactionRepository transactionRepository;
     private UserService userService;
 
-    public ITransactionService(TransactionRepository transactionRepository, UserService userService) {
+    private TipoGastoService tipoGastoService;
+
+    public ITransactionService(
+            TransactionRepository transactionRepository,
+            UserService userService,
+            TipoGastoService tipoGastoService)
+    {
         this.transactionRepository = transactionRepository;
         this.userService = userService;
+        this.tipoGastoService = tipoGastoService;
     }
 
     /**
@@ -27,6 +35,7 @@ public class ITransactionService implements TransactionService {
      */
     @Override
     public Transaction save(Transaction transaction) {
+        transaction.setType(tipoGastoService.findById(transaction.getType().getId()));
         transaction.setUser(userService.findById(transaction.getUser().getId()));
         return this.transactionRepository.save(transaction);
     }
