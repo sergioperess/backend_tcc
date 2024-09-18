@@ -27,6 +27,12 @@ public class User {
     @JsonManagedReference
     private List<Transaction> transactions;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE,
+            mappedBy = "user")
+    @JsonManagedReference
+    private List<TipoGasto> tipoGastos;
+
+
     /**
      *  Construtor vazio
      */
@@ -97,15 +103,23 @@ public class User {
         this.transactions = transactions;
     }
 
+    public List<TipoGasto> getTipoGastos() {
+        return tipoGastos;
+    }
+
+    public void setTipoGastos(List<TipoGasto> tipoGastos) {
+        this.tipoGastos = tipoGastos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User user)) return false;
-        return Objects.equals(getId(), user.getId()) && Objects.equals(getFirstName(), user.getFirstName()) && Objects.equals(getLastName(), user.getLastName()) && Objects.equals(getCpf(), user.getCpf()) && Objects.equals(getSenha(), user.getSenha()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getTransactions(), user.getTransactions());
+        return Objects.equals(getId(), user.getId()) && Objects.equals(getFirstName(), user.getFirstName()) && Objects.equals(getLastName(), user.getLastName()) && Objects.equals(getCpf(), user.getCpf()) && Objects.equals(getSenha(), user.getSenha()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getTransactions(), user.getTransactions()) && Objects.equals(getTipoGastos(), user.getTipoGastos());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getCpf(), getSenha(), getEmail(), getTransactions());
+        return Objects.hash(getId(), getFirstName(), getLastName(), getCpf(), getSenha(), getEmail(), getTransactions(), getTipoGastos());
     }
 }
