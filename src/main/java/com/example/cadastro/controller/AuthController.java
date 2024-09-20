@@ -49,6 +49,16 @@ public class AuthController {
             // Se as senhas forem iguais, gera um token para o usuário
             String token = this.tokenService.generateToken(user);
 
+            // Criando o cookie com o token JWT
+            Cookie authCookie = new Cookie("authToken", token);
+            authCookie.setMaxAge(7 * 24 * 60 * 60); // Definindo o tempo de expiração para 7 dias
+            authCookie.setHttpOnly(true); // Tornando o cookie acessível apenas via HTTP (não acessível por JavaScript)
+            authCookie.setSecure(false); // Definindo o cookie para não ser transmitido apenas via HTTPS (recomendado em produção)
+            authCookie.setPath("/"); // Tornando o cookie disponível em toda a aplicação
+
+            // Adicionando o cookie à resposta HTTP
+            response.addCookie(authCookie);
+
             return ResponseEntity.ok(new LoginView(user.getId(),user.getEmail(), token));
         }
         //return ResponseEntity.badRequest().build();
@@ -83,7 +93,7 @@ public class AuthController {
         Cookie authCookie = new Cookie("authToken", token);
         authCookie.setMaxAge(7 * 24 * 60 * 60); // Definindo o tempo de expiração para 7 dias
         authCookie.setHttpOnly(true); // Tornando o cookie acessível apenas via HTTP (não acessível por JavaScript)
-        authCookie.setSecure(true); // Definindo o cookie para ser transmitido apenas via HTTPS (recomendado em produção)
+        authCookie.setSecure(false); // Definindo o cookie para não ser transmitido apenas via HTTPS (recomendado em produção)
         authCookie.setPath("/"); // Tornando o cookie disponível em toda a aplicação
 
         // Adicionando o cookie à resposta HTTP

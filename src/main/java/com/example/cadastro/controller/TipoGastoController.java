@@ -47,11 +47,11 @@ public class TipoGastoController {
         return ResponseEntity.status(HttpStatus.OK).body(tipoGastoViews);
     }
 
-    @GetMapping("/gastoId/{id}")
+    @GetMapping("/{gastoId}/{id}")
     @Operation(summary = "Listar o Id do tipo de Gastos de uma pessoa",
             description = "Lista o Id do tipo de Gastos de uma pessoa por meio de seu Id para poder criar um novo tipo de gasto")
     public ResponseEntity<TipoGastoView> tipoGastoId(
-            @RequestBody String tipoGasto,
+            @PathVariable("gastoId") String tipoGasto,
             @PathVariable("id") Long userId)
     {
         TipoGasto entity = this.service.tipoGastoId(tipoGasto, userId);
