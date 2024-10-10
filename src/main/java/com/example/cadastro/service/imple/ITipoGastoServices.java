@@ -41,25 +41,31 @@ public class ITipoGastoServices implements TipoGastoService {
         return this.repository.findAllByUserId(userId);
     }
 
+    @Override
+    public void delete(Long id) {
+        TipoGasto gasto = this.findById(id);
+        this.repository.delete(gasto);
+    }
+
+    @Override
+    public List<TipoGasto> findAll() {
+        return this.repository.findAll();
+    }
+
 
     public TipoGasto tipoGastoId(String tipoGasto, Long userId) {
 
         String aux = tipoGasto.substring(0, 1).toUpperCase() + tipoGasto.substring(1).toLowerCase();
+        List<TipoGasto> tipoGastos = findAllByUserId(userId);
 
-        List<TipoGasto> tipoGastos = new ArrayList<>(findAllByUserId(userId));
-
-
-        for (int i = 0; i < tipoGastos.size(); i++) {
-            if (aux.equals(tipoGastos.get(i).getNome())) {
-                return tipoGastos.get(i);
+        for (TipoGasto gasto : tipoGastos) {
+            if (aux.equals(gasto.getNome())) {
+                return gasto;
             }
         }
 
-        User user = new User();
-        user.setId(userId);
-
-        TipoGasto tipo = new TipoGasto(tipoGasto, user);
-
-        return this.repository.save(tipo);
+        // Levantar exceção se não encontrar o tipo de gasto
+        throw new BusinessException("Tipo de gasto não encontrado para o nome: " + tipoGasto);
     }
+
 }
