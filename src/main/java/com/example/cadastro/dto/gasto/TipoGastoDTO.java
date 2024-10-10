@@ -10,7 +10,6 @@ import java.util.Objects;
 public class TipoGastoDTO {
     @NotEmpty(message = "Invalid input")
     private String nome;
-
     @NotNull
     private Long userId;
 

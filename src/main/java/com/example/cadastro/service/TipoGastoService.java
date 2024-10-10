@@ -11,4 +11,8 @@ public interface TipoGastoService {
     public TipoGasto findById(Long id);
 
     public List<TipoGasto> findAllByUserId(Long userId);
+
+    public void delete(Long id);
+
+    public List<TipoGasto> findAll();
 }

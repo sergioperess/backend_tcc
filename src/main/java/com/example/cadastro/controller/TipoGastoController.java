@@ -1,8 +1,12 @@
 package com.example.cadastro.controller;
 
+import com.example.cadastro.dto.gasto.GastoUpdateDTO;
 import com.example.cadastro.dto.gasto.TipoGastoDTO;
 import com.example.cadastro.dto.gasto.TipoGastoView;
+import com.example.cadastro.dto.transaction.TransactionUpdateDTO;
+import com.example.cadastro.dto.transaction.TransactionView;
 import com.example.cadastro.entity.TipoGasto;
+import com.example.cadastro.entity.Transaction;
 import com.example.cadastro.service.imple.ITipoGastoServices;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -58,6 +62,27 @@ public class TipoGastoController {
 
         return ResponseEntity.status(HttpStatus.OK).body(new TipoGastoView(entity));
     }
+
+    @DeleteMapping("{id}")
+    @Operation(summary = "Deletar um gasto",
+            description = "Deletar um gasto id")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable("id") Long id) {
+        this.service.delete(id);
+    }
+
+    @PatchMapping
+    @Operation(summary = "Editar um Gasto", description = "Função para editar um gasto")
+    public ResponseEntity<TipoGastoView> updateGasto(
+            @RequestParam(value = "gastoId") Long id,
+            @RequestBody @Valid GastoUpdateDTO gastoUpdateDTO) {
+
+        TipoGasto updatedGasto = gastoUpdateDTO.toEntity(this.service.findById(id));
+        TipoGasto savedTransaction = this.service.save(updatedGasto);
+
+        return ResponseEntity.status(HttpStatus.OK).body(new TipoGastoView(savedTransaction));
+    }
+
 
 
 }
