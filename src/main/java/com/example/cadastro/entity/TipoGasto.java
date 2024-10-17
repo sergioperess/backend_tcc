@@ -19,6 +19,10 @@ public class TipoGasto {
             mappedBy = "type")
     @JsonManagedReference
     private List<Transaction> transactions;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE,
+            mappedBy = "tipoGasto")
+    @JsonManagedReference
+    private List<Planejamento> planejamentos;
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonBackReference
