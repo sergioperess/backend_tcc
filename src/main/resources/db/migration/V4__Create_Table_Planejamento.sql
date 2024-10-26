@@ -7,4 +7,4 @@ CREATE TABLE planejamento (
    CONSTRAINT pk_planejamento PRIMARY KEY (id)
 );
 
-ALTER TABLE planejamento ADD CONSTRAINT FK_PLANEJAMENTO_ON_GASTO FOREIGN KEY (gasto_id) REFERENCES gasto (id);
+ALTER TABLE planejamento ADD CONSTRAINT FK_PLANEJAMENTO_ON_GASTO FOREIGN KEY (gasto_id) REFERENCES tipo_gasto (id);

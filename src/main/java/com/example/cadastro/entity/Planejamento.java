@@ -10,8 +10,11 @@ public class Planejamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private float valorPlanejado;
+    @Column(nullable = false)
     private int mes;
+    @Column(nullable = false)
     private int ano;
     @ManyToOne
     @JoinColumn(name = "gasto_id")

@@ -11,9 +11,10 @@ import java.util.UUID;
 public class TransactionView {
     private Long id;
     private float valor;
-    private LocalDateTime date;
     private String type;
     private String description;
+    private int mes;
+    private int ano;
 
     public TransactionView() {
     }
@@ -21,9 +22,10 @@ public class TransactionView {
     public TransactionView(Transaction gasto) {
         this.id = gasto.getId();
         this.valor = gasto.getValor();
-        this.date = gasto.getDate();
         this.type = gasto.getType().getNome();
         this.description = gasto.getDescription();
+        this.mes = gasto.getMes();
+        this.ano = gasto.getAno();
     }
 
     public Long getId() {
@@ -42,12 +44,20 @@ public class TransactionView {
         this.valor = valor;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public int getMes() {
+        return mes;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setMes(int mes) {
+        this.mes = mes;
+    }
+
+    public int getAno() {
+        return ano;
+    }
+
+    public void setAno(int ano) {
+        this.ano = ano;
     }
 
     public String getType() {
@@ -70,11 +80,11 @@ public class TransactionView {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof TransactionView that)) return false;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getValor(), that.getValor()) && Objects.equals(getDate(), that.getDate()) && Objects.equals(getType(), that.getType()) && Objects.equals(getDescription(), that.getDescription());
+        return Float.compare(getValor(), that.getValor()) == 0 && getMes() == that.getMes() && getAno() == that.getAno() && Objects.equals(getId(), that.getId()) && Objects.equals(getType(), that.getType()) && Objects.equals(getDescription(), that.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getValor(), getDate(), getType(), getDescription());
+        return Objects.hash(getId(), getValor(), getType(), getDescription(), getMes(), getAno());
     }
 }

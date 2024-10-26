@@ -15,7 +15,8 @@ public class TransactionUpdateDTO {
     private Long typeId;
     @NotEmpty(message = "Invalid input")
     private String description;
-    private LocalDateTime date;
+    private int mes;
+    private int ano;
 
     public TransactionUpdateDTO() {
     }
@@ -24,7 +25,8 @@ public class TransactionUpdateDTO {
         this.valor = transactions.getValor();
         this.typeId = transactions.getType().getId();
         this.description = transactions.getDescription();
-        this.date = transactions.getDate();
+        this.mes = transactions.getMes();
+        this.ano = transactions.getAno();
     }
 
     public Transaction toEntity(Transaction transactions){
@@ -34,7 +36,8 @@ public class TransactionUpdateDTO {
         transactions.setValor(this.valor);
         transactions.setDescription(this.description);
         transactions.setType(tipoGasto);
-        transactions.setDate(LocalDateTime.now());
+        transactions.setMes(this.mes);
+        transactions.setAno(this.ano);
 
         return transactions;
     }
@@ -63,11 +66,19 @@ public class TransactionUpdateDTO {
         this.description = description;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public int getMes() {
+        return mes;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setMes(int mes) {
+        this.mes = mes;
+    }
+
+    public int getAno() {
+        return ano;
+    }
+
+    public void setAno(int ano) {
+        this.ano = ano;
     }
 }

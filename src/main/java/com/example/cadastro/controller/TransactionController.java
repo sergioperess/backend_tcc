@@ -41,7 +41,6 @@ public class TransactionController {
     public ResponseEntity<TransactionView> save(@RequestBody @Valid TransactionDTO transactionDTO) {
 
         Transaction transaction = transactionDTO.toEntity();
-        transaction.setDate(LocalDateTime.now());
         var entity = transactionService.save(transaction);
         return ResponseEntity.status(HttpStatus.CREATED).body(new TransactionView(entity));
     }

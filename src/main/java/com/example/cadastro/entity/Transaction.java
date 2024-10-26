@@ -16,7 +16,9 @@ public class Transaction {
     @Column(nullable = false)
     private float valor;
     @Column(nullable = false)
-    private LocalDateTime date;
+    private int mes;
+    @Column(nullable = false)
+    private int ano;
     @ManyToOne
     @JoinColumn(name = "gasto_id")
     private TipoGasto type = null;
@@ -30,9 +32,11 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(float valor, TipoGasto type, String description, User user) {
+    public Transaction(float valor, TipoGasto type,int mes,int ano, String description, User user) {
         this.valor = valor;
         this.type = type;
+        this.mes = mes;
+        this.ano = ano;
         this.description = description;
         this.user = user;
     }
@@ -45,12 +49,20 @@ public class Transaction {
         this.id = id;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public int getMes() {
+        return mes;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setMes(int mes) {
+        this.mes = mes;
+    }
+
+    public int getAno() {
+        return ano;
+    }
+
+    public void setAno(int ano) {
+        this.ano = ano;
     }
 
     public String getDescription() {
@@ -89,11 +101,11 @@ public class Transaction {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Transaction that)) return false;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getValor(), that.getValor()) && Objects.equals(getDate(), that.getDate()) && Objects.equals(getType(), that.getType()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getUser(), that.getUser());
+        return Float.compare(getValor(), that.getValor()) == 0 && getMes() == that.getMes() && getAno() == that.getAno() && Objects.equals(getId(), that.getId()) && Objects.equals(getType(), that.getType()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getUser(), that.getUser());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getValor(), getDate(), getType(), getDescription(), getUser());
+        return Objects.hash(getId(), getValor(), getMes(), getAno(), getType(), getDescription(), getUser());
     }
 }

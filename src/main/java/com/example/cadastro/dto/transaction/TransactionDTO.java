@@ -15,6 +15,10 @@ public class TransactionDTO {
     private float valor;
     @NotNull
     private Long typeId;
+    @NotNull(message = "Invalid input")
+    private int mes;
+    @NotNull(message = "Invalid input")
+    private int ano;
     @NotEmpty(message = "Invalid input")
     private String description;
     @NotNull
@@ -55,6 +59,22 @@ public class TransactionDTO {
         this.userId = userId;
     }
 
+    public int getMes() {
+        return mes;
+    }
+
+    public void setMes(int mes) {
+        this.mes = mes;
+    }
+
+    public int getAno() {
+        return ano;
+    }
+
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
+
     public Transaction toEntity() {
         User user = new User();
         TipoGasto tipoGasto = new TipoGasto();
@@ -63,6 +83,8 @@ public class TransactionDTO {
         return new Transaction(
                 this.valor,
                 tipoGasto,
+                this.mes,
+                this.ano,
                 this.description,
                 user
         );
@@ -72,11 +94,11 @@ public class TransactionDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof TransactionDTO that)) return false;
-        return Float.compare(getValor(), that.getValor()) == 0 && Objects.equals(getTypeId(), that.getTypeId()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getUserId(), that.getUserId());
+        return Float.compare(getValor(), that.getValor()) == 0 && getMes() == that.getMes() && getAno() == that.getAno() && Objects.equals(getTypeId(), that.getTypeId()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getUserId(), that.getUserId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getValor(), getTypeId(), getDescription(), getUserId());
+        return Objects.hash(getValor(), getTypeId(), getMes(), getAno(), getDescription(), getUserId());
     }
 }
