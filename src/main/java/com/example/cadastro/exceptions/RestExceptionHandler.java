@@ -1,12 +1,16 @@
 package com.example.cadastro.exceptions;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +30,9 @@ public class RestExceptionHandler {
             String messageError = error.getDefaultMessage();
             errors.put(fieldName, messageError);
         });
-        return ResponseEntity.badRequest().body(new ExceptionDetails(
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(new ExceptionDetails(
                 "Bad Request! Consult the documentation",
                 LocalDateTime.now(),
                 HttpStatus.BAD_REQUEST.value(),
@@ -61,19 +67,17 @@ public class RestExceptionHandler {
      * @param ex
      * @return Mensagem de erro detalhada
      */
-    @ExceptionHandler(DataAccessException.class)
-    public ResponseEntity<ExceptionDetails> handleDataAccessException(DataAccessException ex) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ExceptionDetails(
-                "Conflict! Consult the documentation",
-                LocalDateTime.now(),
-                HttpStatus.CONFLICT.value(),
-                ex.getClass().toString(),
-                Map.of(ex.getCause().toString(), ex.getMessage())
-        ));
-    }
-
-
-
-
+//    @ExceptionHandler(DataAccessException.class)
+//    public ResponseEntity<ExceptionDetails> handleDataAccessException(DataAccessException ex) {
+//        return ResponseEntity.status(HttpStatus.CONFLICT)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .body(new ExceptionDetails(
+//                "Conflict! Consult the documentation",
+//                        LocalDateTime.now(),
+//                        HttpStatus.CONFLICT.value(),
+//                        ex.getClass().toString(),
+//                        Map.of(ex.getCause().toString(), ex.getMessage())
+//        ));
+//    }
 
 }

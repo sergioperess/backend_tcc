@@ -14,4 +14,6 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
     // A interface JpaRepository fornece métodos como save, findById, findAll, deleteById, etc.
     Optional<User> findByEmail(String email);
+    Optional<User> findByCpf(String cpf);
+
 }

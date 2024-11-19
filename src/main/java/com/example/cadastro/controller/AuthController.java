@@ -11,10 +11,12 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 // Endpoints de login e cadastro de usuário
@@ -36,17 +38,17 @@ public class AuthController {
     @PostMapping("/login")
     @Operation(summary = "Login do usuário",
             description = "Método utilizado para fazer o login de um Usuário e gerar um token para autenticação")
-    public ResponseEntity login(@RequestBody LoginDTO body){
+    public ResponseEntity<?> login(@RequestBody LoginDTO body) {
 
         // Utilizado para procurar o usuário no banco de dados
         User user = this.repository.findByEmail(body.email())
                 .orElseThrow(() -> new BusinessException("User not found"));
         // Verifica se a senha está correta
-        if(passwordEncoder.matches(body.senha(), user.getSenha())){
+        if (passwordEncoder.matches(body.senha(), user.getSenha())) {
             // Se as senhas forem iguais, gera um token para o usuário
             String token = this.tokenService.generateToken(user);
 
-            return ResponseEntity.ok(new LoginView(user.getId(),user.getEmail(), token));
+            return ResponseEntity.ok(new LoginView(user.getId(), user.getEmail(), token));
         }
         //return ResponseEntity.badRequest().build();
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BusinessException("Senha incorreta"));
@@ -55,29 +57,42 @@ public class AuthController {
     @PostMapping("/register")
     @Operation(summary = "Registrar Usuário",
             description = "Método utilizado para registrar um Usuário e gerar um token para autenticação")
-    public ResponseEntity register(@RequestBody @Valid UserDTO body) {
+    public ResponseEntity<?> register(@RequestBody @Valid UserDTO body) {
         Optional<User> user = this.repository.findByEmail(body.getEmail());
-        if(user.isEmpty()){
-            User newUser = new User();
-            // Salva a senha de forma criptografada no bando de dados
-            newUser.setSenha(passwordEncoder.encode(body.getSenha()));
-            newUser.setEmail(body.getEmail());
-            newUser.setFirstName(body.getFirstName());
-            newUser.setLastName(body.getLastName());
-            newUser.setCpf(body.getCpf());
-            this.repository.save(newUser);
-
-            // Geração do token após o usuário ser criado
-            String token = this.tokenService.generateToken(newUser);
-            return ResponseEntity.ok(new LoginView(newUser.getId(), newUser.getEmail(), token));
+        if (user.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .contentType(MediaType.APPLICATION_JSON) // Define que a resposta será no formato JSON
+                    .body(new HashMap<String, String>() {{
+                        put("message", "E-mail já existe");
+                    }});
         }
-        return ResponseEntity.badRequest().build();
+
+        // Verifica se o CPF já está cadastrado
+        Optional<User> userByCpf = this.repository.findByCpf(body.getCpf());
+        if (userByCpf.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .contentType(MediaType.APPLICATION_JSON) // Define que a resposta será no formato JSON
+                    .body(new HashMap<String, String>() {{
+                        put("message", "CPF já existe");
+                    }});
+        }
+
+
+        User newUser = new User();
+        // Salva a senha de forma criptografada no bando de dados
+        newUser.setSenha(passwordEncoder.encode(body.getSenha()));
+        newUser.setEmail(body.getEmail());
+        newUser.setFirstName(body.getFirstName());
+        newUser.setLastName(body.getLastName());
+        newUser.setCpf(body.getCpf());
+        this.repository.save(newUser);
+
+        // Geração do token após o usuário ser criado
+        String token = this.tokenService.generateToken(newUser);
+        return ResponseEntity.ok(new LoginView(newUser.getId(), newUser.getEmail(), token));
+
+
     }
-
-
-
-
-
 }
 
 

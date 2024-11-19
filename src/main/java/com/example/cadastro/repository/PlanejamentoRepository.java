@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface PlanejamentoRepository extends JpaRepository<Planejamento, Long> {
-    @Query(value = "SELECT * FROM PLANEJAMENTO WHERE GASTO_ID = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM planejamento WHERE gasto_id = ?1", nativeQuery = true)
     public List<Planejamento> findAllByGastoId(Long gastoId);
 
 }

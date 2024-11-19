@@ -9,6 +9,6 @@ import java.util.UUID;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
-    @Query(value = "SELECT * FROM TRANSACAO WHERE USER_ID = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM transacao WHERE user_id = ?1", nativeQuery = true)
     public List<Transaction> findAllByUserId(Long userId);
 }
