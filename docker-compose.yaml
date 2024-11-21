@@ -1,0 +1,43 @@
+services:
+  cadastro:
+    depends_on:
+      - db
+    build: ./
+    ports:
+      - "8080:8080"
+    environment:
+      # Configurações do banco de dados
+      spring.datasource.url: jdbc:mysql://db:3306/vidly
+      spring.datasource.username: user
+      spring.datasource.password: userpassword
+        
+      # Configurações adicionais do Spring
+      spring.jpa.hibernate.ddl-auto: none
+      spring.jpa.show-sql: false
+      spring.jpa.open-in-view: false
+      springdoc.swagger-ui.path: /swagger-ui.html
+      springdoc.paths-to-match: /users/**,/api/transaction/**,/auth/**,/api/gastos/**,/api/planejamento/**
+      api.security.token.secret: secret-key
+
+
+    command: java -jar /app/cadastro.jar
+
+  db:
+    image: mysql:5.7  # Usando a imagem do MySQL 5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword  # Senha do usuário root
+      MYSQL_DATABASE: vidly  # Nome do banco de dados a ser criado
+      MYSQL_USER: user  # Nome de um usuário adicional
+      MYSQL_PASSWORD: userpassword  # Senha do usuário adicional
+    ports:
+      - "3307:3306"  # Expondo a porta 3306
+    volumes:
+      - db-data:/var/lib/mysql  # Volume para persistir os dados do banco
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  db-data:  # Volume para armazenar os dados do MySQL
