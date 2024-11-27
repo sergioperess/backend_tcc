@@ -1,5 +1,5 @@
 services:
-  cadastro:
+  backend_tcc:
     depends_on:
       - db
     build: ./
