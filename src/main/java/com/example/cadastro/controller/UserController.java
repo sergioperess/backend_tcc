@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,9 +24,11 @@ import java.util.stream.Collectors;
 @Tag(name = "User Controller", description = "Endpoints to manipulate a User")
 public class UserController {
     private final IUserServices userServices;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(IUserServices userServices) {
+    public UserController(IUserServices userServices, PasswordEncoder passwordEncoder) {
         this.userServices = userServices;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /**
@@ -87,7 +90,15 @@ public class UserController {
             @RequestParam(value = "userId") Long id,
             @RequestBody @Valid UserUpdateDTO userUpdateDTO) {
 
+        User user = this.userServices.findById(id);
+
+        // Verifica se a senha atual está correta
+        if (!passwordEncoder.matches(userUpdateDTO.getSenhaAtual(), user.getSenha())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null); // Senha atual inválida
+        }
+
         User updatedUser = userUpdateDTO.toEntity(this.userServices.findById(id));
+        updatedUser.setSenha(passwordEncoder.encode(userUpdateDTO.getSenha()));
         User savedUser = this.userServices.save(updatedUser);
 
         return ResponseEntity.status(HttpStatus.OK).body(new UserView(savedUser));

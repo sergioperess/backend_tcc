@@ -16,6 +16,8 @@ public class Transaction {
     @Column(nullable = false)
     private float valor;
     @Column(nullable = false)
+    private int dia;
+    @Column(nullable = false)
     private int mes;
     @Column(nullable = false)
     private int ano;
@@ -32,9 +34,10 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(float valor, TipoGasto type,int mes,int ano, String description, User user) {
+    public Transaction(float valor, TipoGasto type,int dia,int mes,int ano, String description, User user) {
         this.valor = valor;
         this.type = type;
+        this.dia = dia;
         this.mes = mes;
         this.ano = ano;
         this.description = description;
@@ -47,6 +50,14 @@ public class Transaction {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getDia() {
+        return dia;
+    }
+
+    public void setDia(int dia) {
+        this.dia = dia;
     }
 
     public int getMes() {
@@ -101,11 +112,11 @@ public class Transaction {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Transaction that)) return false;
-        return Float.compare(getValor(), that.getValor()) == 0 && getMes() == that.getMes() && getAno() == that.getAno() && Objects.equals(getId(), that.getId()) && Objects.equals(getType(), that.getType()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getUser(), that.getUser());
+        return Float.compare(getValor(), that.getValor()) == 0 && getDia() == that.getDia() && getMes() == that.getMes() && getAno() == that.getAno() && Objects.equals(getId(), that.getId()) && Objects.equals(getType(), that.getType()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getUser(), that.getUser());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getValor(), getMes(), getAno(), getType(), getDescription(), getUser());
+        return Objects.hash(getId(), getValor(), getDia(), getMes(), getAno(), getType(), getDescription(), getUser());
     }
 }

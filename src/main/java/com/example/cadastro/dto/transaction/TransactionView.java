@@ -13,6 +13,7 @@ public class TransactionView {
     private float valor;
     private String type;
     private String description;
+    private int dia;
     private int mes;
     private int ano;
 
@@ -24,6 +25,7 @@ public class TransactionView {
         this.valor = gasto.getValor();
         this.type = gasto.getType().getNome();
         this.description = gasto.getDescription();
+        this.dia = gasto.getDia();
         this.mes = gasto.getMes();
         this.ano = gasto.getAno();
     }
@@ -76,15 +78,24 @@ public class TransactionView {
         this.description = description;
     }
 
+    public int getDia() {
+        return dia;
+    }
+
+    public void setDia(int dia) {
+        this.dia = dia;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof TransactionView that)) return false;
-        return Float.compare(getValor(), that.getValor()) == 0 && getMes() == that.getMes() && getAno() == that.getAno() && Objects.equals(getId(), that.getId()) && Objects.equals(getType(), that.getType()) && Objects.equals(getDescription(), that.getDescription());
+        return Float.compare(getValor(), that.getValor()) == 0 && getDia() == that.getDia() && getMes() == that.getMes() && getAno() == that.getAno() && Objects.equals(getId(), that.getId()) && Objects.equals(getType(), that.getType()) && Objects.equals(getDescription(), that.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getValor(), getType(), getDescription(), getMes(), getAno());
+        return Objects.hash(getId(), getValor(), getType(), getDescription(), getDia(), getMes(), getAno());
     }
 }

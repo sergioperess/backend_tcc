@@ -7,4 +7,5 @@ import java.util.List;
 public interface PlanejamentoService {
     public List<Planejamento> findAllByGastoId(Long gastoId);
     public Planejamento salvarPlanejamento(Planejamento planejamento);
+    public void delete(Long id);
 }

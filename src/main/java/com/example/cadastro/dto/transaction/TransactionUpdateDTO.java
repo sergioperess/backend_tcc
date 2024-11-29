@@ -15,6 +15,7 @@ public class TransactionUpdateDTO {
     private Long typeId;
     @NotEmpty(message = "Invalid input")
     private String description;
+    private int dia;
     private int mes;
     private int ano;
 
@@ -25,6 +26,7 @@ public class TransactionUpdateDTO {
         this.valor = transactions.getValor();
         this.typeId = transactions.getType().getId();
         this.description = transactions.getDescription();
+        this.dia = transactions.getDia();
         this.mes = transactions.getMes();
         this.ano = transactions.getAno();
     }
@@ -36,6 +38,7 @@ public class TransactionUpdateDTO {
         transactions.setValor(this.valor);
         transactions.setDescription(this.description);
         transactions.setType(tipoGasto);
+        transactions.setDia(this.dia);
         transactions.setMes(this.mes);
         transactions.setAno(this.ano);
 
@@ -80,5 +83,13 @@ public class TransactionUpdateDTO {
 
     public void setAno(int ano) {
         this.ano = ano;
+    }
+
+    public int getDia() {
+        return dia;
+    }
+
+    public void setDia(int dia) {
+        this.dia = dia;
     }
 }

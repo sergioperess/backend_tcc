@@ -1,6 +1,7 @@
 CREATE TABLE transacao (
   id BIGINT AUTO_INCREMENT NOT NULL,
    valor FLOAT NOT NULL,
+   dia INT NOT NULL,
    mes INT NOT NULL,
    ano INT NOT NULL,
    gasto_id BIGINT NULL,

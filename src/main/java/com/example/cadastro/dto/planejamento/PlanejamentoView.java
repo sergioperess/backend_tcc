@@ -6,6 +6,7 @@ import com.example.cadastro.entity.Planejamento;
 import java.util.Objects;
 
 public class PlanejamentoView {
+    private Long id;
     private float valorPlanejado;
     private String type;
     private int mes;
@@ -15,6 +16,7 @@ public class PlanejamentoView {
     }
 
     public PlanejamentoView(Planejamento planejamento) {
+        this.id = planejamento.getId();
         this.valorPlanejado = planejamento.getValorPlanejado();
         this.type = planejamento.getTipoGasto().getNome();
         this.mes = planejamento.getMes();
@@ -53,15 +55,23 @@ public class PlanejamentoView {
         this.type = type;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof PlanejamentoView that)) return false;
-        return Float.compare(getValorPlanejado(), that.getValorPlanejado()) == 0 && getMes() == that.getMes() && getAno() == that.getAno() && Objects.equals(getType(), that.getType());
+        return Float.compare(getValorPlanejado(), that.getValorPlanejado()) == 0 && getMes() == that.getMes() && getAno() == that.getAno() && Objects.equals(getId(), that.getId()) && Objects.equals(getType(), that.getType());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getValorPlanejado(), getType(), getMes(), getAno());
+        return Objects.hash(getId(), getValorPlanejado(), getType(), getMes(), getAno());
     }
 }
