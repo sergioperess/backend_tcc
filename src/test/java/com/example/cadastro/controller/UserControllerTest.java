@@ -4,7 +4,7 @@ import com.example.cadastro.dto.UserDTO;
 import com.example.cadastro.dto.UserUpdateDTO;
 import com.example.cadastro.dto.UserView;
 import com.example.cadastro.entity.User;
-import com.example.cadastro.service.imple.IUserServices;
+import com.example.cadastro.service.imple.UserServices;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -12,14 +12,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class UserControllerTest {
     @Mock
-    private IUserServices userServices;
+    private UserServices userServices;
 
     @InjectMocks
     private UserController userController;

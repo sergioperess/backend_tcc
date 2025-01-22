@@ -3,18 +3,18 @@ package com.example.cadastro.service.imple;
 import com.example.cadastro.entity.User;
 import com.example.cadastro.exceptions.BusinessException;
 import com.example.cadastro.repository.UserRepository;
-import com.example.cadastro.service.UserService;
+import com.example.cadastro.service.IUserService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class IUserServices implements UserService {
+public class UserServices implements IUserService {
 
     private final UserRepository userRepository;
 
-    public IUserServices(UserRepository userRepository) {
+    public UserServices(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

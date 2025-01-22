@@ -4,7 +4,7 @@ import com.example.cadastro.entity.Transaction;
 
 import java.util.List;
 
-public interface TransactionService {
+public interface ITransactionService {
     public Transaction save(Transaction transaction);
 
     public Transaction findById(Long id);

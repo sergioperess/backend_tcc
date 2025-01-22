@@ -7,7 +7,7 @@ import java.util.List;
 /**
  *  Interface para definir os serviços
  */
-public interface UserService {
+public interface IUserService {
     public User save(User user);
 
     public User findById(Long id);

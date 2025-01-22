@@ -1,23 +1,20 @@
 package com.example.cadastro.service.imple;
 
 import com.example.cadastro.entity.TipoGasto;
-import com.example.cadastro.entity.Transaction;
-import com.example.cadastro.entity.User;
 import com.example.cadastro.exceptions.BusinessException;
 import com.example.cadastro.repository.TipoGastoRepository;
-import com.example.cadastro.service.TipoGastoService;
+import com.example.cadastro.service.ITipoGastoService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ITipoGastoServices implements TipoGastoService {
+public class TipoGastoServices implements ITipoGastoService {
 
     private final TipoGastoRepository repository;
-    private final IUserServices userServices;
+    private final UserServices userServices;
 
-    public ITipoGastoServices(TipoGastoRepository repository, IUserServices userServices) {
+    public TipoGastoServices(TipoGastoRepository repository, UserServices userServices) {
         this.repository = repository;
         this.userServices = userServices;
     }

@@ -3,11 +3,8 @@ package com.example.cadastro.controller;
 import com.example.cadastro.dto.gasto.GastoUpdateDTO;
 import com.example.cadastro.dto.gasto.TipoGastoDTO;
 import com.example.cadastro.dto.gasto.TipoGastoView;
-import com.example.cadastro.dto.transaction.TransactionUpdateDTO;
-import com.example.cadastro.dto.transaction.TransactionView;
 import com.example.cadastro.entity.TipoGasto;
-import com.example.cadastro.entity.Transaction;
-import com.example.cadastro.service.imple.ITipoGastoServices;
+import com.example.cadastro.service.imple.TipoGastoServices;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -23,9 +20,9 @@ import java.util.List;
 @Tag(name = "TipoGasto Controller", description = "Endpoints para manipular um tipo de gasto")
 public class TipoGastoController {
 
-    private final ITipoGastoServices service;
+    private final TipoGastoServices service;
 
-    public TipoGastoController(ITipoGastoServices service) {
+    public TipoGastoController(TipoGastoServices service) {
         this.service = service;
     }
 

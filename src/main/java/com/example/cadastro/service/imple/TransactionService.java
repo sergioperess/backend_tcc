@@ -3,24 +3,24 @@ package com.example.cadastro.service.imple;
 import com.example.cadastro.entity.Transaction;
 import com.example.cadastro.exceptions.BusinessException;
 import com.example.cadastro.repository.TransactionRepository;
-import com.example.cadastro.service.TipoGastoService;
-import com.example.cadastro.service.TransactionService;
-import com.example.cadastro.service.UserService;
+import com.example.cadastro.service.ITipoGastoService;
+import com.example.cadastro.service.ITransactionService;
+import com.example.cadastro.service.IUserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ITransactionService implements TransactionService {
+public class TransactionService implements ITransactionService {
     private TransactionRepository transactionRepository;
-    private UserService userService;
+    private IUserService userService;
 
-    private TipoGastoService tipoGastoService;
+    private ITipoGastoService tipoGastoService;
 
-    public ITransactionService(
+    public TransactionService(
             TransactionRepository transactionRepository,
-            UserService userService,
-            TipoGastoService tipoGastoService)
+            IUserService userService,
+            ITipoGastoService tipoGastoService)
     {
         this.transactionRepository = transactionRepository;
         this.userService = userService;

@@ -4,7 +4,7 @@ import com.example.cadastro.dto.UserDTO;
 import com.example.cadastro.dto.UserUpdateDTO;
 import com.example.cadastro.dto.UserView;
 import com.example.cadastro.entity.User;
-import com.example.cadastro.service.imple.IUserServices;
+import com.example.cadastro.service.imple.UserServices;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -23,10 +23,10 @@ import java.util.stream.Collectors;
 @RequestMapping("/users")
 @Tag(name = "User Controller", description = "Endpoints to manipulate a User")
 public class UserController {
-    private final IUserServices userServices;
+    private final UserServices userServices;
     private final PasswordEncoder passwordEncoder;
 
-    public UserController(IUserServices userServices, PasswordEncoder passwordEncoder) {
+    public UserController(UserServices userServices, PasswordEncoder passwordEncoder) {
         this.userServices = userServices;
         this.passwordEncoder = passwordEncoder;
     }

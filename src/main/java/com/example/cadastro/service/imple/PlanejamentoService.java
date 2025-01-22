@@ -3,20 +3,18 @@ package com.example.cadastro.service.imple;
 import com.example.cadastro.entity.Planejamento;
 import com.example.cadastro.exceptions.BusinessException;
 import com.example.cadastro.repository.PlanejamentoRepository;
-import com.example.cadastro.repository.TipoGastoRepository;
-import com.example.cadastro.service.PlanejamentoService;
 
+import com.example.cadastro.service.IPlanejamentoService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class IPlanejamentoService implements PlanejamentoService {
+public class PlanejamentoService implements IPlanejamentoService {
     private final PlanejamentoRepository planejamentoRepository;
-    private final ITipoGastoServices services;
+    private final TipoGastoServices services;
 
-    public IPlanejamentoService(PlanejamentoRepository planejamentoRepository, ITipoGastoServices services) {
+    public PlanejamentoService(PlanejamentoRepository planejamentoRepository, TipoGastoServices services) {
         this.planejamentoRepository = planejamentoRepository;
         this.services = services;
     }

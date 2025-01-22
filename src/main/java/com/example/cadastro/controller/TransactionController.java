@@ -4,7 +4,7 @@ import com.example.cadastro.dto.transaction.TransactionDTO;
 import com.example.cadastro.dto.transaction.TransactionUpdateDTO;
 import com.example.cadastro.dto.transaction.TransactionView;
 import com.example.cadastro.entity.Transaction;
-import com.example.cadastro.service.imple.ITransactionService;
+import com.example.cadastro.service.imple.TransactionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,9 +22,9 @@ import java.util.stream.Collectors;
 @Tag(name = "Transaction Controller", description = "Endpoints to manipulate a Transaction")
 public class TransactionController {
 
-    private final ITransactionService transactionService;
+    private final TransactionService transactionService;
 
-    public TransactionController(ITransactionService transactionService) {
+    public TransactionController(TransactionService transactionService) {
         this.transactionService = transactionService;
     }
 

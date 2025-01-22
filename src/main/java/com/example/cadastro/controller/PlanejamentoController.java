@@ -4,7 +4,7 @@ import com.example.cadastro.dto.planejamento.PlanejamentoDTO;
 import com.example.cadastro.dto.planejamento.PlanejamentoUpdateDTO;
 import com.example.cadastro.dto.planejamento.PlanejamentoView;
 import com.example.cadastro.entity.Planejamento;
-import com.example.cadastro.service.imple.IPlanejamentoService;
+import com.example.cadastro.service.imple.PlanejamentoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -20,9 +20,9 @@ import java.util.List;
 @Tag(name = "Planejamento Controller", description = "Endpoints para manipular um planejamento para um tipo de gasto")
 public class PlanejamentoController {
 
-    private final IPlanejamentoService service;
+    private final PlanejamentoService service;
 
-    public PlanejamentoController(IPlanejamentoService service) {
+    public PlanejamentoController(PlanejamentoService service) {
         this.service = service;
     }
 
